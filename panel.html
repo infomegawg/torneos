@@ -8,68 +8,68 @@
 <style>
 :root{--g:#00FF87;--gd:#00C060;--bg:#090d12;--s1:#111820;--s2:#182030;--s3:#1e2a3a;--bd:rgba(255,255,255,0.08);--tx:#f0f4f8;--mu:#6a7a8a;--re:#ff4466;--go:#FFD700;--si:#B8C4CC;--br:#CD7F32;--r:10px;--rl:16px;}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+body{font-family:Barlow,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
 .hdr{background:#000;border-bottom:1px solid var(--bd);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;position:relative}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--g);line-height:1}
-.logo small{display:block;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:var(--mu);letter-spacing:1px;text-transform:uppercase}
-.live{display:flex;align-items:center;gap:5px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--g)}
+.logo{font-family:Bebas Neue,sans-serif;font-size:20px;color:var(--g);line-height:1}
+.logo small{display:block;font-family:Barlow Condensed,sans-serif;font-size:10px;font-weight:700;color:var(--mu);letter-spacing:1px;text-transform:uppercase}
+.live{display:flex;align-items:center;gap:5px;font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;color:var(--g)}
 .live-dot{width:8px;height:8px;border-radius:50%;background:var(--g);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--bd)}
-.tab{flex:1;padding:11px 4px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--mu);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent}
+.tab{flex:1;padding:11px 4px;font-family:Barlow Condensed,sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--mu);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent}
 .tab.on{color:var(--g);border-bottom-color:var(--g)}
 .pg{display:none;padding:14px 14px 40px}.pg.on{display:block}
-.sec{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:1px;color:var(--g);margin-bottom:12px}
+.sec{font-family:Bebas Neue,sans-serif;font-size:19px;letter-spacing:1px;color:var(--g);margin-bottom:12px}
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:14px;margin-bottom:12px}
-.ctitle{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:10px}
+.ctitle{font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:10px}
 .strow{display:flex;gap:8px;margin-bottom:12px}
 .stbox{flex:1;background:var(--s2);border-radius:var(--r);padding:12px 6px;text-align:center}
-.stval{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--g)}
+.stval{font-family:Bebas Neue,sans-serif;font-size:28px;color:var(--g)}
 .stlbl{font-size:10px;color:var(--mu);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
 .pb{background:var(--s2);border-radius:4px;height:6px;overflow:hidden;margin:6px 0}
 .pbf{height:100%;background:var(--g);border-radius:4px;transition:width .5s}
 /* PHASE BADGE */
 .phase-banner{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.3);border-radius:var(--rl);padding:16px;text-align:center;margin-bottom:14px}
-.phase-title{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--go);letter-spacing:1px}
+.phase-title{font-family:Bebas Neue,sans-serif;font-size:26px;color:var(--go);letter-spacing:1px}
 .phase-sub{font-size:13px;color:var(--mu);margin-top:4px}
 /* GROUP TABLE */
 .grp-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);margin-bottom:10px;overflow:hidden}
 .grp-hdr{background:var(--s2);padding:7px 12px;display:flex;justify-content:space-between;align-items:center}
-.grp-nm{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--g);letter-spacing:1px}
-.grp-prog{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--mu)}
+.grp-nm{font-family:Bebas Neue,sans-serif;font-size:17px;color:var(--g);letter-spacing:1px}
+.grp-prog{font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;color:var(--mu)}
 .grp-table{width:100%;border-collapse:collapse;font-size:13px}
-.grp-table th{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;padding:5px 8px;border-bottom:1px solid var(--bd);text-align:left}
+.grp-table th{font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;padding:5px 8px;border-bottom:1px solid var(--bd);text-align:left}
 .grp-table td{padding:7px 8px;border-bottom:1px solid var(--bd)}
 .grp-table tr:last-child td{border-bottom:none}
-.grp-pts{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--g);text-align:center}
+.grp-pts{font-family:Bebas Neue,sans-serif;font-size:18px;color:var(--g);text-align:center}
 .qualified{background:rgba(0,255,135,.04)}
 /* KO */
 .ko-match{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);margin-bottom:8px;overflow:hidden}
 .ko-match.done{border-left:3px solid var(--g)}
 .ko-hdr{background:var(--s2);padding:5px 12px;display:flex;justify-content:space-between}
-.ko-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;color:var(--mu);text-transform:uppercase}
+.ko-lbl{font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:12px;color:var(--mu);text-transform:uppercase}
 .ko-row{display:flex;align-items:center;padding:9px 12px;gap:10px}
 .ko-row:first-child{border-bottom:1px solid var(--bd)}
-.ko-dor{font-family:'Bebas Neue',sans-serif;font-size:20px;min-width:54px;text-align:center;padding:3px 4px;border-radius:7px;background:var(--s3);color:var(--tx)}
+.ko-dor{font-family:Bebas Neue,sans-serif;font-size:20px;min-width:54px;text-align:center;padding:3px 4px;border-radius:7px;background:var(--s3);color:var(--tx)}
 .ko-dor.win{background:rgba(0,255,135,.12);color:var(--g)}.ko-dor.lose{background:rgba(255,68,102,.08);color:var(--re)}
 .ko-nm{flex:1;font-weight:600;font-size:14px}
-.ko-sc{font-family:'Bebas Neue',sans-serif;font-size:26px;min-width:28px;text-align:center}
+.ko-sc{font-family:Bebas Neue,sans-serif;font-size:26px;min-width:28px;text-align:center}
 .ko-sc.win{color:var(--g)}.ko-sc.lose{color:var(--re)}
 /* WINNER */
 .winner-banner{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.3);border-radius:var(--rl);padding:20px;text-align:center;margin-bottom:14px}
-.winner-name{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--go);letter-spacing:1px}
+.winner-name{font-family:Bebas Neue,sans-serif;font-size:34px;color:var(--go);letter-spacing:1px}
 /* LOADING */
 .loading{text-align:center;padding:60px 20px;color:var(--mu)}
 .loading-spin{font-size:36px;animation:spin 1s linear infinite;display:block;margin-bottom:12px}
 @keyframes spin{to{transform:rotate(360deg)}}
 /* LAST UPDATE */
-.last-upd{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--mu);font-weight:700;text-align:center;padding:8px;letter-spacing:.3px}
+.last-upd{font-family:Barlow Condensed,sans-serif;font-size:11px;color:var(--mu);font-weight:700;text-align:center;padding:8px;letter-spacing:.3px}
 /* ACTIVITY LOG */
 .log-row{padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px}
 .log-row:last-child{border-bottom:none}
-.log-time{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--mu);font-weight:700}
+.log-time{font-family:Barlow Condensed,sans-serif;font-size:11px;color:var(--mu);font-weight:700}
 .log-match{color:var(--tx)}
-.log-staff{color:var(--g);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px}
+.log-staff{color:var(--g);font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:12px}
 </style>
 </head>
 <body>
@@ -220,16 +220,16 @@ function renderResumen() {
     var wn=S.winnerNames||{};
     cnt.innerHTML = '<div class="winner-banner">'
       +'<div style="font-size:40px;margin-bottom:8px">🏆</div>'
-      +'<div style="font-size:13px;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Campeón del Torneo</div>'
+      +'<div style="font-size:13px;color:var(--mu);font-family:Barlow Condensed,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Campeón del Torneo</div>'
       +'<div class="winner-name">'+esc(pName(ch))+'</div>'
       +(wn.first?'<div style="font-size:14px;color:var(--go);margin-top:6px">'+esc(wn.first)+'</div>':'')
       +'</div>'
       +'<div class="card"><div class="ctitle">Podio final</div><div style="display:flex;flex-direction:column;gap:8px">'
-      +'<div style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(255,215,0,.07);border-radius:var(--r)"><span style="font-size:24px">🥇</span><div><div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--go)">'+esc(pName(ch))+'</div>'+(wn.first?'<div style="font-size:12px;color:var(--mu)">'+esc(wn.first)+'</div>':'')+'</div></div>'
-      +'<div style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(192,200,208,.07);border-radius:var(--r)"><span style="font-size:24px">🥈</span><div><div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--si)">'+esc(pName(ru))+'</div>'+(wn.second?'<div style="font-size:12px;color:var(--mu)">'+esc(wn.second)+'</div>':'')+'</div></div>'
-      +(th?'<div style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(205,127,50,.07);border-radius:var(--r)"><span style="font-size:24px">🥉</span><div><div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--br)">'+esc(pName(th))+'</div>'+(wn.third?'<div style="font-size:12px;color:var(--mu)">'+esc(wn.third)+'</div>':'')+'</div></div>':'')
+      +'<div style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(255,215,0,.07);border-radius:var(--r)"><span style="font-size:24px">🥇</span><div><div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:var(--go)">'+esc(pName(ch))+'</div>'+(wn.first?'<div style="font-size:12px;color:var(--mu)">'+esc(wn.first)+'</div>':'')+'</div></div>'
+      +'<div style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(192,200,208,.07);border-radius:var(--r)"><span style="font-size:24px">🥈</span><div><div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:var(--si)">'+esc(pName(ru))+'</div>'+(wn.second?'<div style="font-size:12px;color:var(--mu)">'+esc(wn.second)+'</div>':'')+'</div></div>'
+      +(th?'<div style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(205,127,50,.07);border-radius:var(--r)"><span style="font-size:24px">🥉</span><div><div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:var(--br)">'+esc(pName(th))+'</div>'+(wn.third?'<div style="font-size:12px;color:var(--mu)">'+esc(wn.third)+'</div>':'')+'</div></div>':'')
       +'</div></div>'
-      +(wn.savedBy?'<div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--mu);text-align:center;padding:4px">Registrado por: '+esc(wn.savedBy)+' · '+esc(wn.savedAt||'')+'</div>':'');
+      +(wn.savedBy?'<div style="font-family:Barlow Condensed,sans-serif;font-size:11px;color:var(--mu);text-align:center;padding:4px">Registrado por: '+esc(wn.savedBy)+' · '+esc(wn.savedAt||'')+'</div>':'');
     return;
   }
 
@@ -254,7 +254,7 @@ function renderResumen() {
     last.matches.forEach(function(m,i){
       var p1=pById(m.p1),p2=pById(m.p2),done=m._done,w=done?koWinner(m):null;
       var r1=done?(w===m.p1?'win':'lose'):'',r2=done?(w===m.p2?'win':'lose'):'';
-      html+='<div class="ko-match '+(done?'done':'')+'"><div class="ko-hdr"><span class="ko-lbl">Partido '+(i+1)+'</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:'+(done?'var(--g)':'var(--mu)')+'">'+( done?'✓':'Pendiente')+'</span></div>'
+      html+='<div class="ko-match '+(done?'done':'')+'"><div class="ko-hdr"><span class="ko-lbl">Partido '+(i+1)+'</span><span style="font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;color:'+(done?'var(--g)':'var(--mu)')+'">'+( done?'✓':'Pendiente')+'</span></div>'
         +'<div class="ko-row"><div class="ko-dor '+r1+'">'+esc(p1?p1.dorsal:'?')+'</div><div class="ko-nm">'+esc(p1?pName(p1):'TBD')+'</div>'+(done?'<div class="ko-sc '+r1+'">'+m.s1+'</div>':'')+'</div>'
         +'<div class="ko-row"><div class="ko-dor '+r2+'">'+esc(p2?p2.dorsal:'?')+'</div><div class="ko-nm">'+esc(p2?pName(p2):'TBD')+'</div>'+(done?'<div class="ko-sc '+r2+'">'+m.s2+'</div>':'')+'</div></div>';
     });
@@ -281,14 +281,14 @@ function renderGrupos(){
   if(S.groups2&&S.groups2.length)phases.push({label:'Fase 2 · 8 grupos',groups:S.groups2});
   if(!phases.length){cnt.innerHTML='<div style="text-align:center;padding:40px;color:var(--mu)">Sin grupos disponibles aún</div>';return;}
   cnt.innerHTML=phases.map(function(ph){
-    return '<div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">'+ph.label+'</div>'
+    return '<div style="font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:13px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">'+ph.label+'</div>'
     +ph.groups.map(function(g){
       var st=groupStandings(g),done=g.matches.filter(function(m){return m.s1!==null;}).length;
       return '<div class="grp-wrap"><div class="grp-hdr"><span class="grp-nm">'+esc(g.name)+'</span><span class="grp-prog">'+done+'/'+g.matches.length+'</span></div>'
         +'<table class="grp-table"><thead><tr><th>#</th><th>Dorsal</th><th style="text-align:center">Pts</th><th style="text-align:center">GD</th></tr></thead><tbody>'
         +st.map(function(s,i){var pl=pById(s.id);var gd=s.gf-s.gc;
-          return '<tr style="background:'+(i<2?'rgba(0,255,135,.04)':'')+'"><td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;color:'+(i<2?'var(--g)':'var(--mu)')+'">'+(i<2?'→':i+1)+'</td>'
-          +'<td style="padding:7px 8px;border-bottom:1px solid var(--bd);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px">'+esc(pName(pl))+'</td>'
+          return '<tr style="background:'+(i<2?'rgba(0,255,135,.04)':'')+'"><td style="font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:13px;padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;color:'+(i<2?'var(--g)':'var(--mu)')+'">'+(i<2?'→':i+1)+'</td>'
+          +'<td style="padding:7px 8px;border-bottom:1px solid var(--bd);font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:13px">'+esc(pName(pl))+'</td>'
           +'<td class="grp-pts" style="padding:7px 8px;border-bottom:1px solid var(--bd)">'+s.pts+'</td>'
           +'<td style="padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;font-size:12px;color:'+(gd>0?'var(--g)':gd<0?'var(--re)':'var(--mu)')+'">'+( gd>0?'+':'')+gd+'</td></tr>';
         }).join('')+'</tbody></table></div>';
@@ -301,20 +301,20 @@ function renderBracket(){
   if(!S||!S.knockout||!S.knockout.length){cnt.innerHTML='<div style="text-align:center;padding:40px;color:var(--mu)">Disponible desde octavos de final</div>';return;}
   cnt.innerHTML=S.knockout.map(function(round){
     var label=round.isFinal||round.is3rd?round.round+' (Bo3)':round.round;
-    var html='<div style="margin-bottom:4px;margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px">'+esc(label)+'</div>';
+    var html='<div style="margin-bottom:4px;margin-top:10px;font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px">'+esc(label)+'</div>';
     if(round.isFinal||round.is3rd){
       var p1=pById(round.fp1),p2=pById(round.fp2);
       html+='<div style="background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.25);border-radius:var(--r);padding:10px 12px;margin-bottom:6px">'
-        +'<div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--go);margin-bottom:6px">'+esc(pName(p1))+' '+round.w1+' - '+round.w2+' '+esc(pName(p2))+'</div>'
+        +'<div style="font-family:Bebas Neue,sans-serif;font-size:18px;color:var(--go);margin-bottom:6px">'+esc(pName(p1))+' '+round.w1+' - '+round.w2+' '+esc(pName(p2))+'</div>'
         +round.matches.filter(function(m){return m._done;}).map(function(m,i){
           var w=koWinner(m);
-          return '<div style="font-size:13px;margin-bottom:3px"><span style="color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-weight:700">P'+(i+1)+':</span> <span style="color:'+(w===m.p1?'var(--g)':'var(--mu)')+'">'+m.s1+'</span> - <span style="color:'+(w===m.p2?'var(--g)':'var(--mu)')+'">'+m.s2+'</span>'+(m.pen?' <span style="color:var(--go);font-size:11px">(pen '+m.ps1+'-'+m.ps2+')</span>':'')+'</div>';
+          return '<div style="font-size:13px;margin-bottom:3px"><span style="color:var(--mu);font-family:Barlow Condensed,sans-serif;font-weight:700">P'+(i+1)+':</span> <span style="color:'+(w===m.p1?'var(--g)':'var(--mu)')+'">'+m.s1+'</span> - <span style="color:'+(w===m.p2?'var(--g)':'var(--mu)')+'">'+m.s2+'</span>'+(m.pen?' <span style="color:var(--go);font-size:11px">(pen '+m.ps1+'-'+m.ps2+')</span>':'')+'</div>';
         }).join('')+'</div>';
     } else {
       round.matches.forEach(function(m,mi){
         var p1=pById(m.p1),p2=pById(m.p2),done=m._done,w=done?koWinner(m):null;
         var r1=done?(w===m.p1?'win':'lose'):'',r2=done?(w===m.p2?'win':'lose'):'';
-        html+='<div class="ko-match '+(done?'done':'')+'"><div class="ko-hdr"><span class="ko-lbl">Partido '+(mi+1)+'</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:'+(done?'var(--g)':'var(--mu)')+'">'+( done?'✓ Finalizado':'Pendiente')+'</span></div>'
+        html+='<div class="ko-match '+(done?'done':'')+'"><div class="ko-hdr"><span class="ko-lbl">Partido '+(mi+1)+'</span><span style="font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;color:'+(done?'var(--g)':'var(--mu)')+'">'+( done?'✓ Finalizado':'Pendiente')+'</span></div>'
           +'<div class="ko-row"><div class="ko-dor '+r1+'">'+esc(p1?p1.dorsal:'?')+'</div><div class="ko-nm">'+esc(p1?pName(p1):'TBD')+'</div>'+(done?'<div class="ko-sc '+r1+'">'+m.s1+'</div>':'')+'</div>'
           +'<div class="ko-row"><div class="ko-dor '+r2+'">'+esc(p2?p2.dorsal:'?')+'</div><div class="ko-nm">'+esc(p2?pName(p2):'TBD')+'</div>'+(done?'<div class="ko-sc '+r2+'">'+m.s2+'</div>':'')+'</div>'
           +(m.pen?'<div style="font-size:11px;color:var(--go);padding:3px 12px;background:rgba(255,215,0,.07)">Penaltis: '+m.ps1+' - '+m.ps2+'</div>':'')
@@ -330,7 +330,7 @@ function renderActividad(){
   if(!activityLog.length){cnt.innerHTML='<div style="text-align:center;padding:40px;color:var(--mu)">Sin actividad registrada aún</div>';return;}
   cnt.innerHTML='<div class="card">'+activityLog.map(function(entry){
     var p1=pById(entry.p1),p2=pById(entry.p2);
-    return '<div class="log-row"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span class="log-match"><b style="color:var(--tx)">'+esc(pName(p1))+'</b> <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:'+(entry.s1>entry.s2?'var(--g)':entry.s1<entry.s2?'var(--re)':'var(--go)')+'">'+entry.s1+'</span> - <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:'+(entry.s2>entry.s1?'var(--g)':entry.s2<entry.s1?'var(--re)':'var(--go)')+'">'+entry.s2+'</span> <b style="color:var(--tx)">'+esc(pName(p2))+'</b>'+(entry.pen?' <span style="color:var(--go);font-size:11px">(pen '+entry.ps1+'-'+entry.ps2+')</span>':'')+'</span><span class="log-time">'+esc(entry.ts)+'</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:var(--mu)">'+esc(entry.label)+'</span>'+(entry.staff?'<span class="log-staff">'+esc(entry.staff)+'</span>':'')+'</div></div>';
+    return '<div class="log-row"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span class="log-match"><b style="color:var(--tx)">'+esc(pName(p1))+'</b> <span style="font-family:Bebas Neue,sans-serif;font-size:18px;color:'+(entry.s1>entry.s2?'var(--g)':entry.s1<entry.s2?'var(--re)':'var(--go)')+'">'+entry.s1+'</span> - <span style="font-family:Bebas Neue,sans-serif;font-size:18px;color:'+(entry.s2>entry.s1?'var(--g)':entry.s2<entry.s1?'var(--re)':'var(--go)')+'">'+entry.s2+'</span> <b style="color:var(--tx)">'+esc(pName(p2))+'</b>'+(entry.pen?' <span style="color:var(--go);font-size:11px">(pen '+entry.ps1+'-'+entry.ps2+')</span>':'')+'</span><span class="log-time">'+esc(entry.ts)+'</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:var(--mu)">'+esc(entry.label)+'</span>'+(entry.staff?'<span class="log-staff">'+esc(entry.staff)+'</span>':'')+'</div></div>';
   }).join('')+'</div>';
 }
 </script>
