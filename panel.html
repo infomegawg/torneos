@@ -175,15 +175,17 @@ function kow(m) {
 function buildLog() {
   var log = [];
   function scan(matches, label) {
+    if (!matches) return;
     matches.forEach(function(m) {
+      if (!m) return;
       if ((m._done || m.s1 !== null) && m._ts) {
         log.push({ts: m._ts, label: label, s1: m.s1, s2: m.s2, p1: m.p1, p2: m.p2, staff: m._staff || "", pen: m.pen, ps1: m.ps1, ps2: m.ps2});
       }
     });
   }
-  (S.groups1 || []).forEach(function(g) { scan(g.matches, g.name + " F1"); });
-  (S.groups2 || []).forEach(function(g) { scan(g.matches, g.name + " F2"); });
-  (S.knockout || []).forEach(function(r) { scan(r.matches, r.round); });
+  (S.groups1 || []).forEach(function(g) { if(g) scan(g.matches, g.name + " F1"); });
+  (S.groups2 || []).forEach(function(g) { if(g) scan(g.matches, g.name + " F2"); });
+  (S.knockout || []).forEach(function(r) { if(r) scan(r.matches, r.round); });
   log.sort(function(a, b) { return b.ts.localeCompare(a.ts); });
   actLog = log;
 }
@@ -232,12 +234,20 @@ function renderResumen() {
 
   var phases = {"groups1": "Fase 1 - Grupos", "groups2": "Fase 2 - Grupos", "knockout": "Eliminatorias"};
   var label = phases[S.phase] || S.phase;
-  var groups = S.phase === "groups1" ? S.groups1 : S.phase === "groups2" ? S.groups2 : null;
+  var groups = S.phase === "groups1" ? (S.groups1||[]) : S.phase === "groups2" ? (S.groups2||[]) : null;
   var done = 0, total = 0;
-  if (groups) {
-    groups.forEach(function(g) { done += g.matches.filter(function(m) { return m.s1 !== null; }).length; total += g.matches.length; });
+  if (groups && groups.length) {
+    groups.forEach(function(g) {
+      if (!g || !g.matches) return;
+      done += g.matches.filter(function(m) { return m.s1 !== null; }).length;
+      total += g.matches.length;
+    });
   } else {
-    (S.knockout || []).forEach(function(r) { done += r.matches.filter(function(m) { return m._done; }).length; total += r.matches.length; });
+    (S.knockout || []).forEach(function(r) {
+      if (!r || !r.matches) return;
+      done += r.matches.filter(function(m) { return m._done; }).length;
+      total += r.matches.length;
+    });
   }
   var pct = total > 0 ? Math.round(done / total * 100) : 0;
 
@@ -298,8 +308,10 @@ function renderGrupos() {
   var cnt = document.getElementById("gruposContent");
   if (!S || !S.phase) { cnt.innerHTML = "Sin datos"; return; }
   var phases = [];
-  if (S.groups1 && S.groups1.length) phases.push({label: "Fase 1 - 16 grupos", groups: S.groups1});
-  if (S.groups2 && S.groups2.length) phases.push({label: "Fase 2 - 8 grupos", groups: S.groups2});
+  if (S.groups1 && S.groups1.length) phases.push({label: "Fase 1", groups: S.groups1});
+  if (S.groups2 && S.groups2.length) phases.push({label: "Fase 2", groups: S.groups2});
+  // If phase is groups1 but no groups2, show groups1 as current
+  if (!phases.length && S.groups1 && S.groups1.length) phases.push({label: "Grupos", groups: S.groups1});
   if (!phases.length) { cnt.innerHTML = "Sin grupos disponibles"; return; }
 
   var html = "";
