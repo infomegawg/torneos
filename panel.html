@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>OWG Panel Torneo</title>
+<title>OWG Panel</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
@@ -17,11 +17,11 @@ body{font-family:"Barlow",sans-serif;background:var(--bg);color:var(--tx);min-he
 .live{display:flex;align-items:center;gap:5px;font-family:"Barlow Condensed",sans-serif;font-size:12px;font-weight:700;color:var(--g)}
 .live-dot{width:8px;height:8px;border-radius:50%;background:var(--g);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--bd)}
-.tab{flex:1;padding:11px 4px;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--mu);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent}
+.tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:60px;padding:11px 4px;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--mu);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
 .tab.on{color:var(--g);border-bottom-color:var(--g)}
 .pg{display:none;padding:14px 14px 40px}.pg.on{display:block}
-.sec{font-family:"Bebas Neue",sans-serif;font-size:19px;letter-spacing:1px;color:var(--g);margin-bottom:12px}
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:14px;margin-bottom:12px}
 .ctitle{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:10px}
 .strow{display:flex;gap:8px;margin-bottom:12px}
@@ -33,10 +33,6 @@ body{font-family:"Barlow",sans-serif;background:var(--bg);color:var(--tx);min-he
 .phase-banner{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.3);border-radius:var(--rl);padding:16px;text-align:center;margin-bottom:14px}
 .phase-title{font-family:"Bebas Neue",sans-serif;font-size:26px;color:var(--go);letter-spacing:1px}
 .phase-sub{font-size:13px;color:var(--mu);margin-top:4px}
-.grp-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);margin-bottom:10px;overflow:hidden}
-.grp-hdr{background:var(--s2);padding:7px 12px;display:flex;justify-content:space-between;align-items:center}
-.grp-nm{font-family:"Bebas Neue",sans-serif;font-size:17px;color:var(--g);letter-spacing:1px}
-.grp-prog{font-family:"Barlow Condensed",sans-serif;font-size:12px;font-weight:700;color:var(--mu)}
 .ko-match{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);margin-bottom:8px;overflow:hidden}
 .ko-match.done{border-left:3px solid var(--g)}
 .ko-hdr{background:var(--s2);padding:5px 12px;display:flex;justify-content:space-between}
@@ -50,26 +46,13 @@ body{font-family:"Barlow",sans-serif;background:var(--bg);color:var(--tx);min-he
 .ko-sc.win{color:var(--g)}.ko-sc.lose{color:var(--re)}
 .winner-banner{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.3);border-radius:var(--rl);padding:20px;text-align:center;margin-bottom:14px}
 .winner-name{font-family:"Bebas Neue",sans-serif;font-size:34px;color:var(--go);letter-spacing:1px}
-.loading{text-align:center;padding:60px 20px;color:var(--mu);font-size:15px}
 .log-row{padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px}
 .log-row:last-child{border-bottom:none}
 .last-upd{font-family:"Barlow Condensed",sans-serif;font-size:11px;color:var(--mu);font-weight:700;text-align:center;padding:4px;background:#000;letter-spacing:.3px}
 .stats-tbl{width:100%;border-collapse:collapse;font-size:13px}
-.stats-tbl th{font-family:"Barlow Condensed",sans-serif;font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;padding:6px 6px;border-bottom:1px solid var(--bd);text-align:center;white-space:nowrap;cursor:pointer}
-.stats-tbl th:first-child{text-align:left}
-.stats-tbl th.sort-asc::after{content:" ▲"}
-.stats-tbl th.sort-desc::after{content:" ▼"}
-.stats-tbl td{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:center;vertical-align:middle}
-.stats-tbl td:first-child{text-align:left;font-weight:700}
+.stats-tbl th{font-family:"Barlow Condensed",sans-serif;font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;border-bottom:1px solid var(--bd);text-align:center;cursor:pointer}
+.stats-tbl td{border-bottom:1px solid var(--bd);text-align:center;vertical-align:middle}
 .stats-tbl tr:last-child td{border-bottom:none}
-.stats-tbl tr.highlight{background:rgba(0,255,135,.04)}
-.stat-pts{font-family:"Bebas Neue",sans-serif;font-size:20px;color:var(--g)}
-.stat-w{color:var(--g);font-weight:700}
-.stat-l{color:var(--re);font-weight:700}
-.stat-d{color:var(--go);font-weight:700}
-.stat-gd-pos{color:var(--g);font-weight:700}
-.stat-gd-neg{color:var(--re);font-weight:700}
-.search-box{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px;color:var(--tx);font-size:15px;outline:none;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -81,7 +64,7 @@ body{font-family:"Barlow",sans-serif;background:var(--bg);color:var(--tx);min-he
 <div style="background:var(--s1);border-bottom:1px solid var(--bd);padding:6px 14px;display:flex;align-items:center;gap:8px">
   <span style="font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;white-space:nowrap">Torneo:</span>
   <select id="docSelector" onchange="changeDoc(this.value)" style="flex:1;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:6px 10px;color:var(--tx);font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:13px;outline:none">
-    <option value="fc26_activo">Torneo Hoy (fc26_activo)</option>
+    <option value="fc26_activo">Torneo Fase 1 (hoy)</option>
     <option value="fc26_fase2">FC26 Fase 2</option>
   </select>
 </div>
@@ -93,77 +76,103 @@ body{font-family:"Barlow",sans-serif;background:var(--bg);color:var(--tx);min-he
   <button class="tab" onclick="goTab('bracket',this)">Bracket</button>
   <button class="tab" onclick="goTab('actividad',this)">Actividad</button>
 </div>
-<div class="pg on" id="pg-resumen"><div class="loading" id="resumenContent">Conectando con Firebase...</div></div>
-<div class="pg" id="pg-grupos"><div class="loading" id="gruposContent">Cargando...</div></div>
-<div class="pg" id="pg-bracket"><div class="loading" id="bracketContent">Cargando...</div></div>
-<div class="pg" id="pg-stats">
-  <div class="sec">Estadisticas</div>
-  <div id="statsContent" class="loading">Cargando...</div>
-</div>
-<div class="pg" id="pg-actividad"><div class="sec">Actividad</div><div id="actividadContent" class="loading">Cargando...</div></div>
+<div class="pg on" id="pg-resumen"><div id="resumenContent" style="text-align:center;padding:40px;color:var(--mu)">Conectando...</div></div>
+<div class="pg" id="pg-stats"><div id="statsContent" style="padding:14px"></div></div>
+<div class="pg" id="pg-grupos"><div id="gruposContent" style="text-align:center;padding:40px;color:var(--mu)">Cargando...</div></div>
+<div class="pg" id="pg-bracket"><div id="bracketContent" style="text-align:center;padding:40px;color:var(--mu)">Disponible desde octavos</div></div>
+<div class="pg" id="pg-actividad"><div id="actividadContent" style="text-align:center;padding:40px;color:var(--mu)">Sin actividad</div></div>
 <script>
 
-firebase.initializeApp({
-  apiKey: "AIzaSyCBemsmPYqa7nqcvP8YyAOYijzOLJRSMmc",
-  authDomain: "eventos-owg.firebaseapp.com",
-  projectId: "eventos-owg",
-  storageBucket: "eventos-owg.firebasestorage.app",
-  messagingSenderId: "751397475474",
-  appId: "1:751397475474:web:b9a322adafcbe2b993424b"
-});
-var db = firebase.firestore();
-var _db = db;
+var _db = null;
+var _unsubscribe = null;
+var _currentDoc = localStorage.getItem("owg_panel_doc") || "fc26_activo";
 var S = null;
 var activeTab = "resumen";
 var actLog = [];
+var sortCol = "pts";
+var sortDir = -1;
+
+function initFirebase() {
+  firebase.initializeApp({
+    apiKey: "AIzaSyCBemsmPYqa7nqcvP8YyAOYijzOLJRSMmc",
+    authDomain: "eventos-owg.firebaseapp.com",
+    projectId: "eventos-owg",
+    storageBucket: "eventos-owg.firebasestorage.app",
+    messagingSenderId: "751397475474",
+    appId: "1:751397475474:web:b9a322adafcbe2b993424b"
+  });
+  _db = firebase.firestore();
+  var sel = document.getElementById("docSelector");
+  if (sel) sel.value = _currentDoc;
+  listenToDoc(_currentDoc);
+}
+
+function changeDoc(docName) {
+  _currentDoc = docName;
+  localStorage.setItem("owg_panel_doc", docName);
+  S = null; actLog = [];
+  document.getElementById("resumenContent").innerHTML = "Conectando...";
+  document.getElementById("lastUpd").textContent = "Conectando...";
+  document.getElementById("hdrDoc").textContent = docName;
+  listenToDoc(docName);
+}
+
+function listenToDoc(docName) {
+  if (_unsubscribe) { _unsubscribe(); _unsubscribe = null; }
+  _unsubscribe = _db.collection("torneos").doc(docName).onSnapshot(function(snap) {
+    if (!snap.exists) {
+      document.getElementById("resumenContent").innerHTML = "Sin datos. Abre la app de staff primero.";
+      document.getElementById("lastUpd").textContent = "Sin datos";
+      return;
+    }
+    try {
+      var raw = snap.data().state;
+      S = typeof raw === "string" ? JSON.parse(raw) : raw;
+      if (!S) throw new Error("Estado vacio");
+      buildLog();
+      renderAll();
+      var now = new Date();
+      var evtName = S.eventName || docName;
+      document.getElementById("hdrDoc").textContent = evtName;
+      document.getElementById("lastUpd").textContent = "Actualizado: " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+    } catch(e) {
+      document.getElementById("resumenContent").innerHTML = "Error al leer datos: " + e.message;
+    }
+  }, function(err) {
+    document.getElementById("resumenContent").innerHTML = "Error Firebase: " + err.message;
+  });
+}
 
 function goTab(id, el) {
-  document.querySelectorAll(".pg").forEach(function(p){ p.classList.remove("on"); });
-  document.querySelectorAll(".tab").forEach(function(t){ t.classList.remove("on"); });
+  document.querySelectorAll(".pg").forEach(function(p) { p.classList.remove("on"); });
+  document.querySelectorAll(".tab").forEach(function(t) { t.classList.remove("on"); });
   document.getElementById("pg-" + id).classList.add("on");
   el.classList.add("on");
   activeTab = id;
   if (S) renderAll();
 }
 
-_db.collection("torneos").doc("fc26_activo").onSnapshot(function(snap) {
-  if (!snap.exists) {
-    document.getElementById("resumenContent").innerHTML = "El torneo no ha comenzado.";
-    document.getElementById("lastUpd").textContent = "Sin datos";
-    return;
-  }
-  try {
-    S = JSON.parse(snap.data().state);
-    buildLog();
-    renderAll();
-    var now = new Date();
-    var evtName = S && S.eventName ? S.eventName + " · " : "";
-    document.getElementById("lastUpd").textContent = evtName + "Actualizado: " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
-  } catch(e) {
-    document.getElementById("resumenContent").innerHTML = "Error al leer datos: " + e.message;
-  }
-}, function(err) {
-  document.getElementById("resumenContent").innerHTML = "Error Firebase: " + err.message;
-  document.getElementById("lastUpd").textContent = "Error";
-});
-
 function pad(n) { return String(n).padStart(2, "0"); }
 function pn(p) { return p ? (p.alias || p.dorsal) : "?"; }
-function pb(id) { if (!S) return null; return S.players.find(function(p) { return p.id === id; }); }
+function pb(id) { if (!S || !S.players) return null; return S.players.find(function(p) { return p.id === id; }); }
 function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 function gst(grp) {
+  if (!grp || !grp.playerIds) return [];
   var st = {};
-  grp.playerIds.forEach(function(id) { st[id] = {id:id, pts:0, gf:0, gc:0}; });
-  grp.matches.forEach(function(m) {
-    if (m.s1 === null) return;
+  grp.playerIds.forEach(function(id) { st[id] = {id:id,pts:0,gf:0,gc:0,w:0,d:0,l:0}; });
+  (grp.matches||[]).forEach(function(m) {
+    if (!m || m.s1 === null || m.s1 === undefined) return;
     var a = st[m.p1], b = st[m.p2];
+    if (!a || !b) return;
     a.gf += m.s1; a.gc += m.s2; b.gf += m.s2; b.gc += m.s1;
-    if (m.s1 > m.s2) { a.pts += 3; } else if (m.s1 < m.s2) { b.pts += 3; } else { a.pts += 1; b.pts += 1; }
+    if (m.s1 > m.s2) { a.pts+=3; a.w++; b.l++; }
+    else if (m.s1 < m.s2) { b.pts+=3; b.w++; a.l++; }
+    else { a.pts+=1; b.pts+=1; a.d++; b.d++; }
   });
   return Object.values(st).sort(function(a,b) {
-    if (b.pts !== a.pts) return b.pts - a.pts;
-    return (b.gf - b.gc) - (a.gf - a.gc);
+    if (b.pts!==a.pts) return b.pts-a.pts;
+    return (b.gf-b.gc)-(a.gf-a.gc);
   });
 }
 
@@ -177,128 +186,106 @@ function buildLog() {
   function scan(matches, label) {
     if (!matches) return;
     matches.forEach(function(m) {
-      if (!m) return;
-      if ((m._done || m.s1 !== null) && m._ts) {
-        log.push({ts: m._ts, label: label, s1: m.s1, s2: m.s2, p1: m.p1, p2: m.p2, staff: m._staff || "", pen: m.pen, ps1: m.ps1, ps2: m.ps2});
-      }
+      if (!m || (m.s1 === null || m.s1 === undefined) || !m._ts) return;
+      log.push({ts:m._ts, label:label, s1:m.s1, s2:m.s2, p1:m.p1, p2:m.p2, staff:m._staff||"", pen:m.pen, ps1:m.ps1, ps2:m.ps2});
     });
   }
-  (S.groups1 || []).forEach(function(g) { if(g) scan(g.matches, g.name + " F1"); });
-  (S.groups2 || []).forEach(function(g) { if(g) scan(g.matches, g.name + " F2"); });
-  (S.knockout || []).forEach(function(r) { if(r) scan(r.matches, r.round); });
-  log.sort(function(a, b) { return b.ts.localeCompare(a.ts); });
+  (S.groups1||[]).forEach(function(g) { if(g) scan(g.matches, (g.name||"") + " F1"); });
+  (S.groups2||[]).forEach(function(g) { if(g) scan(g.matches, (g.name||"") + " F2"); });
+  (S.knockout||[]).forEach(function(r) { if(r) scan(r.matches, r.round||"KO"); });
+  log.sort(function(a,b) { return b.ts.localeCompare(a.ts); });
   actLog = log;
 }
 
 function renderAll() {
   renderResumen();
-  if (activeTab === "grupos") renderGrupos();
-  if (activeTab === "bracket") renderBracket();
-  if (activeTab === "actividad") renderActividad();
+  if (activeTab==="grupos") renderGrupos();
+  if (activeTab==="bracket") renderBracket();
+  if (activeTab==="actividad") renderActividad();
+  if (activeTab==="stats") renderStats();
 }
 
 function renderResumen() {
   var cnt = document.getElementById("resumenContent");
-  if (!S || !S.phase) { cnt.innerHTML = "El torneo no ha comenzado."; return; }
+  if (!S || !S.phase) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>El torneo no ha comenzado.</div>"; return; }
 
   if (S.finished) {
-    var ch = pb(S.champion), ru = pb(S.runnerUp), th = S.third ? pb(S.third) : null, wn = S.winnerNames || {};
-    var html = '<div class="winner-banner">';
-    html += '<div style="font-size:40px;margin-bottom:8px">&#127942;</div>';
-    html += '<div style="font-size:13px;color:var(--mu);margin-bottom:4px">CAMPEON DEL TORNEO</div>';
-    html += '<div class="winner-name">' + esc(pn(ch)) + '</div>';
-    if (wn.first) html += '<div style="font-size:14px;color:var(--go);margin-top:6px">' + esc(wn.first) + '</div>';
-    html += '</div>';
-    html += '<div class="card"><div class="ctitle">Podio</div>';
-    html += '<div style="padding:10px;background:rgba(255,215,0,.07);border-radius:var(--r);margin-bottom:6px;display:flex;align-items:center;gap:10px">';
-    html += '<span style="font-size:22px">&#129351;</span><div>';
-    html += '<div style="font-size:18px;color:var(--go)">' + esc(pn(ch)) + '</div>';
-    if (wn.first) html += '<div style="font-size:12px;color:var(--mu)">' + esc(wn.first) + '</div>';
-    html += '</div></div>';
-    html += '<div style="padding:10px;background:rgba(192,200,208,.07);border-radius:var(--r);margin-bottom:6px;display:flex;align-items:center;gap:10px">';
-    html += '<span style="font-size:22px">&#129352;</span><div>';
-    html += '<div style="font-size:18px;color:var(--si)">' + esc(pn(ru)) + '</div>';
-    if (wn.second) html += '<div style="font-size:12px;color:var(--mu)">' + esc(wn.second) + '</div>';
-    html += '</div></div>';
-    if (th) {
-      html += '<div style="padding:10px;background:rgba(205,127,50,.07);border-radius:var(--r);display:flex;align-items:center;gap:10px">';
-      html += '<span style="font-size:22px">&#129353;</span><div>';
-      html += '<div style="font-size:18px;color:var(--br)">' + esc(pn(th)) + '</div>';
-      if (wn.third) html += '<div style="font-size:12px;color:var(--mu)">' + esc(wn.third) + '</div>';
-      html += '</div></div>';
-    }
-    html += '</div>';
+    var ch=pb(S.champion), ru=pb(S.runnerUp), th=S.third?pb(S.third):null, wn=S.winnerNames||{};
+    var html = "";
+    html += "<div class='winner-banner'>";
+    html += "<div style='font-size:40px;margin-bottom:8px'>&#127942;</div>";
+    html += "<div style='font-size:13px;color:var(--mu);margin-bottom:4px'>CAMPEON DEL TORNEO</div>";
+    html += "<div class='winner-name'>" + esc(pn(ch)) + "</div>";
+    if (wn.first) html += "<div style='font-size:14px;color:var(--go);margin-top:6px'>" + esc(wn.first) + "</div>";
+    html += "</div>";
+    html += "<div class='card'><div class='ctitle'>Podio</div><div style='display:flex;flex-direction:column;gap:8px'>";
+    html += "<div style='display:flex;align-items:center;gap:10px;padding:10px;background:rgba(255,215,0,.07);border-radius:var(--r)'><span style='font-size:24px'>&#129351;</span><div><div style='font-size:18px;color:var(--go)'>" + esc(pn(ch)) + "</div>" + (wn.first ? "<div style='font-size:12px;color:var(--mu)'>" + esc(wn.first) + "</div>" : "") + "</div></div>";
+    html += "<div style='display:flex;align-items:center;gap:10px;padding:10px;background:rgba(192,200,208,.07);border-radius:var(--r)'><span style='font-size:24px'>&#129352;</span><div><div style='font-size:18px;color:var(--si)'>" + esc(pn(ru)) + "</div>" + (wn.second ? "<div style='font-size:12px;color:var(--mu)'>" + esc(wn.second) + "</div>" : "") + "</div></div>";
+    if (th) html += "<div style='display:flex;align-items:center;gap:10px;padding:10px;background:rgba(205,127,50,.07);border-radius:var(--r)'><span style='font-size:24px'>&#129353;</span><div><div style='font-size:18px;color:var(--br)'>" + esc(pn(th)) + "</div>" + (wn.third ? "<div style='font-size:12px;color:var(--mu)'>" + esc(wn.third) + "</div>" : "") + "</div></div>";
+    html += "</div></div>";
     cnt.innerHTML = html;
     return;
   }
 
-  var phases = {"groups1": "Fase 1 - Grupos", "groups2": "Fase 2 - Grupos", "knockout": "Eliminatorias"};
-  var label = phases[S.phase] || S.phase;
-  var groups = S.phase === "groups1" ? (S.groups1||[]) : S.phase === "groups2" ? (S.groups2||[]) : null;
-  var done = 0, total = 0;
+  var phaseLabels = {"groups1":"Fase 1 - Grupos","groups2":"Fase 2 - Grupos","knockout":"Eliminatorias"};
+  var label = phaseLabels[S.phase] || S.phase;
+  var groups = S.phase==="groups1" ? (S.groups1||[]) : S.phase==="groups2" ? (S.groups2||[]) : null;
+  var done=0, total=0;
   if (groups && groups.length) {
     groups.forEach(function(g) {
       if (!g || !g.matches) return;
-      done += g.matches.filter(function(m) { return m.s1 !== null; }).length;
-      total += g.matches.length;
+      g.matches.forEach(function(m) { total++; if (m && m.s1!==null && m.s1!==undefined) done++; });
     });
   } else {
-    (S.knockout || []).forEach(function(r) {
+    (S.knockout||[]).forEach(function(r) {
       if (!r || !r.matches) return;
-      done += r.matches.filter(function(m) { return m._done; }).length;
-      total += r.matches.length;
+      r.matches.forEach(function(m) { total++; if (m && m._done) done++; });
     });
   }
-  var pct = total > 0 ? Math.round(done / total * 100) : 0;
+  var pct = total>0 ? Math.round(done/total*100) : 0;
 
-  var html = '<div class="phase-banner">';
-  html += '<div class="phase-title">' + esc(label) + '</div>';
-  html += '<div class="phase-sub">' + done + ' de ' + total + ' partidos completados</div>';
-  html += '</div>';
-  html += '<div class="strow">';
-  html += '<div class="stbox"><div class="stval">' + done + '</div><div class="stlbl">Completados</div></div>';
-  html += '<div class="stbox"><div class="stval">' + (total - done) + '</div><div class="stlbl">Pendientes</div></div>';
-  html += '<div class="stbox"><div class="stval">' + pct + '%</div><div class="stlbl">Progreso</div></div>';
-  html += '</div>';
-  html += '<div class="pb"><div class="pbf" style="width:' + pct + '%"></div></div>';
+  var html = "";
+  html += "<div class='phase-banner'><div class='phase-title'>" + esc(label) + "</div><div class='phase-sub'>" + done + " de " + total + " partidos completados</div></div>";
+  html += "<div class='strow'>";
+  html += "<div class='stbox'><div class='stval'>" + done + "</div><div class='stlbl'>Completados</div></div>";
+  html += "<div class='stbox'><div class='stval'>" + (total-done) + "</div><div class='stlbl'>Pendientes</div></div>";
+  html += "<div class='stbox'><div class='stval'>" + pct + "%</div><div class='stlbl'>Progreso</div></div>";
+  html += "</div>";
+  html += "<div class='pb'><div class='pbf' style='width:" + pct + "%'></div></div>";
 
-  if (S.phase === "knockout" && S.knockout && S.knockout.length) {
-    var last = S.knockout[S.knockout.length - 1];
-    html += '<div class="card"><div class="ctitle">Ronda actual: ' + esc(last.round) + '</div>';
-    last.matches.forEach(function(m, i) {
-      var p1 = pb(m.p1), p2 = pb(m.p2), d = m._done, w = d ? kow(m) : null;
-      var r1 = d ? (w === m.p1 ? "win" : "lose") : "", r2 = d ? (w === m.p2 ? "win" : "lose") : "";
-      html += '<div class="ko-match ' + (d ? "done" : "") + '">';
-      html += '<div class="ko-hdr"><span class="ko-lbl">Partido ' + (i+1) + '</span>';
-      html += '<span style="font-size:11px;color:' + (d ? "var(--g)" : "var(--mu)") + '">' + (d ? "Finalizado" : "Pendiente") + '</span></div>';
-      html += '<div class="ko-row"><div class="ko-dor ' + r1 + '">' + esc(p1 ? p1.dorsal : "?") + '</div>';
-      html += '<div class="ko-nm">' + esc(pn(p1)) + '</div>';
-      if (d) html += '<div class="ko-sc ' + r1 + '">' + m.s1 + '</div>';
-      html += '</div>';
-      html += '<div class="ko-row"><div class="ko-dor ' + r2 + '">' + esc(p2 ? p2.dorsal : "?") + '</div>';
-      html += '<div class="ko-nm">' + esc(pn(p2)) + '</div>';
-      if (d) html += '<div class="ko-sc ' + r2 + '">' + m.s2 + '</div>';
-      html += '</div></div>';
-    });
-    html += '</div>';
+  if (S.phase==="knockout" && S.knockout && S.knockout.length) {
+    var last = S.knockout[S.knockout.length-1];
+    if (last && last.matches) {
+      html += "<div class='card'><div class='ctitle'>Ronda actual: " + esc(last.round||"") + "</div>";
+      last.matches.forEach(function(m, i) {
+        if (!m) return;
+        var p1=pb(m.p1), p2=pb(m.p2), d=m._done, w=d?kow(m):null;
+        var r1=d?(w===m.p1?"win":"lose"):"", r2=d?(w===m.p2?"win":"lose"):"";
+        html += "<div class='ko-match" + (d?" done":"") + "'>";
+        html += "<div class='ko-hdr'><span class='ko-lbl'>Partido " + (i+1) + "</span><span style='font-size:11px;color:" + (d?"var(--g)":"var(--mu)") + "'>" + (d?"Finalizado":"Pendiente") + "</span></div>";
+        html += "<div class='ko-row'><div class='ko-dor " + r1 + "'>" + esc(p1?p1.dorsal:"?") + "</div><div class='ko-nm'>" + esc(pn(p1)) + "</div>" + (d?"<div class='ko-sc " + r1 + "'>" + m.s1 + "</div>":"") + "</div>";
+        html += "<div class='ko-row'><div class='ko-dor " + r2 + "'>" + esc(p2?p2.dorsal:"?") + "</div><div class='ko-nm'>" + esc(pn(p2)) + "</div>" + (d?"<div class='ko-sc " + r2 + "'>" + m.s2 + "</div>":"") + "</div>";
+        html += "</div>";
+      });
+      html += "</div>";
+    }
   }
 
   if (actLog.length) {
-    html += '<div class="card"><div class="ctitle">Ultimos resultados</div>';
-    actLog.slice(0, 5).forEach(function(e) {
-      var p1 = pb(e.p1), p2 = pb(e.p2);
-      var penStr = e.pen ? " (pen " + e.ps1 + "-" + e.ps2 + ")" : "";
-      html += '<div class="log-row">';
-      html += '<div style="display:flex;justify-content:space-between;margin-bottom:2px">';
-      html += '<span>' + esc(pn(p1)) + ' <b>' + e.s1 + ' - ' + e.s2 + '</b> ' + esc(pn(p2)) + penStr + '</span>';
-      html += '<span style="font-size:11px;color:var(--mu)">' + esc(e.ts) + '</span>';
-      html += '</div>';
-      html += '<div style="display:flex;justify-content:space-between">';
-      html += '<span style="font-size:11px;color:var(--mu)">' + esc(e.label) + '</span>';
-      if (e.staff) html += '<span style="font-size:12px;color:var(--g)">' + esc(e.staff) + '</span>';
-      html += '</div></div>';
+    html += "<div class='card'><div class='ctitle'>Ultimos resultados</div>";
+    actLog.slice(0,5).forEach(function(e) {
+      var p1=pb(e.p1), p2=pb(e.p2);
+      var pen = e.pen ? " (pen " + e.ps1 + "-" + e.ps2 + ")" : "";
+      html += "<div class='log-row'>";
+      html += "<div style='display:flex;justify-content:space-between;margin-bottom:2px'>";
+      html += "<span>" + esc(pn(p1)) + " <b>" + e.s1 + " - " + e.s2 + "</b> " + esc(pn(p2)) + pen + "</span>";
+      html += "<span style='font-size:11px;color:var(--mu)'>" + esc(e.ts) + "</span></div>";
+      html += "<div style='display:flex;justify-content:space-between'>";
+      html += "<span style='font-size:11px;color:var(--mu)'>" + esc(e.label) + "</span>";
+      if (e.staff) html += "<span style='font-size:12px;color:var(--g)'>" + esc(e.staff) + "</span>";
+      html += "</div></div>";
     });
-    html += '</div>';
+    html += "</div>";
   }
 
   cnt.innerHTML = html;
@@ -306,37 +293,40 @@ function renderResumen() {
 
 function renderGrupos() {
   var cnt = document.getElementById("gruposContent");
-  if (!S || !S.phase) { cnt.innerHTML = "Sin datos"; return; }
+  if (!S || !S.phase) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>Sin datos</div>"; return; }
   var phases = [];
-  if (S.groups1 && S.groups1.length) phases.push({label: "Fase 1", groups: S.groups1});
-  if (S.groups2 && S.groups2.length) phases.push({label: "Fase 2", groups: S.groups2});
-  // If phase is groups1 but no groups2, show groups1 as current
-  if (!phases.length && S.groups1 && S.groups1.length) phases.push({label: "Grupos", groups: S.groups1});
-  if (!phases.length) { cnt.innerHTML = "Sin grupos disponibles"; return; }
-
+  if (S.groups1 && S.groups1.length) phases.push({label:"Fase 1", groups:S.groups1});
+  if (S.groups2 && S.groups2.length) phases.push({label:"Fase 2", groups:S.groups2});
+  if (!phases.length) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>Sin grupos disponibles</div>"; return; }
   var html = "";
   phases.forEach(function(ph) {
-    html += '<div style="font-size:13px;color:var(--mu);font-weight:700;text-transform:uppercase;margin-bottom:8px">' + ph.label + '</div>';
+    html += "<div style='font-size:13px;color:var(--mu);font-weight:700;text-transform:uppercase;margin-bottom:8px'>" + ph.label + "</div>";
     ph.groups.forEach(function(g) {
-      var st = gst(g), done = g.matches.filter(function(m) { return m.s1 !== null; }).length;
-      html += '<div class="grp-wrap">';
-      html += '<div class="grp-hdr"><span class="grp-nm">' + esc(g.name) + '</span><span class="grp-prog">' + done + '/' + g.matches.length + '</span></div>';
-      html += '<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr>';
-      html += '<th style="padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:left">#</th>';
-      html += '<th style="padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:left">Dorsal</th>';
-      html += '<th style="padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:center">Pts</th>';
-      html += '<th style="padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:center">GD</th>';
-      html += '</tr></thead><tbody>';
-      st.forEach(function(s, i) {
-        var pl = pb(s.id), gd = s.gf - s.gc;
-        html += '<tr style="background:' + (i < 2 ? 'rgba(0,255,135,.04)' : '') + '">';
-        html += '<td style="padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;color:' + (i < 2 ? 'var(--g)' : 'var(--mu)') + '">' + (i < 2 ? '->' : i+1) + '</td>';
-        html += '<td style="padding:7px 8px;border-bottom:1px solid var(--bd);font-weight:700">' + esc(pn(pl)) + '</td>';
-        html += '<td style="padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;font-size:18px;color:var(--g)">' + s.pts + '</td>';
-        html += '<td style="padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;font-size:12px;color:' + (gd > 0 ? 'var(--g)' : gd < 0 ? 'var(--re)' : 'var(--mu)') + '">' + (gd > 0 ? '+' : '') + gd + '</td>';
-        html += '</tr>';
+      if (!g) return;
+      var st = gst(g);
+      var done = (g.matches||[]).filter(function(m){return m&&m.s1!==null&&m.s1!==undefined;}).length;
+      html += "<div style='background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);margin-bottom:10px;overflow:hidden'>";
+      html += "<div style='background:var(--s2);padding:8px 12px;display:flex;justify-content:space-between'>";
+      html += "<span style='font-family:Bebas Neue,sans-serif;font-size:18px;color:var(--g)'>" + esc(g.name||"") + "</span>";
+      html += "<span style='font-size:12px;font-weight:700;color:var(--mu)'>" + done + "/" + (g.matches||[]).length + "</span></div>";
+      html += "<table style='width:100%;border-collapse:collapse;font-size:13px'><thead><tr>";
+      html += "<th style='padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:left'>#</th>";
+      html += "<th style='padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:left'>Dorsal</th>";
+      html += "<th style='padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:center'>Pts</th>";
+      html += "<th style='padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:center'>J</th>";
+      html += "<th style='padding:5px 8px;border-bottom:1px solid var(--bd);color:var(--mu);font-size:11px;text-align:center'>GD</th>";
+      html += "</tr></thead><tbody>";
+      st.forEach(function(s,i) {
+        var pl=pb(s.id), gd=s.gf-s.gc;
+        html += "<tr style='background:" + (i<2?"rgba(0,255,135,.04)":"") + "'>";
+        html += "<td style='padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;color:" + (i<2?"var(--g)":"var(--mu)") + "'>" + (i<2?"&#8594;":i+1) + "</td>";
+        html += "<td style='padding:7px 8px;border-bottom:1px solid var(--bd);font-weight:700'>" + esc(pn(pl)) + "</td>";
+        html += "<td style='padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;font-family:Bebas Neue,sans-serif;font-size:18px;color:var(--g)'>" + s.pts + "</td>";
+        html += "<td style='padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;color:var(--mu)'>" + (s.w+s.d+s.l) + "</td>";
+        html += "<td style='padding:7px 8px;border-bottom:1px solid var(--bd);text-align:center;color:" + (gd>0?"var(--g)":gd<0?"var(--re)":"var(--mu)") + "'>" + (gd>0?"+":"") + gd + "</td>";
+        html += "</tr>";
       });
-      html += '</tbody></table></div>';
+      html += "</tbody></table></div>";
     });
   });
   cnt.innerHTML = html;
@@ -344,75 +334,177 @@ function renderGrupos() {
 
 function renderBracket() {
   var cnt = document.getElementById("bracketContent");
-  if (!S || !S.knockout || !S.knockout.length) { cnt.innerHTML = "Disponible desde octavos de final"; return; }
+  if (!S || !S.knockout || !S.knockout.length) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>Disponible desde octavos</div>"; return; }
   var html = "";
   S.knockout.forEach(function(round) {
-    var label = (round.isFinal || round.is3rd) ? round.round + " (Bo3)" : round.round;
-    html += '<div style="margin-top:10px;font-size:12px;color:var(--mu);font-weight:700;text-transform:uppercase;padding-bottom:6px">' + esc(label) + '</div>';
-    if (round.isFinal || round.is3rd) {
-      var p1 = pb(round.fp1), p2 = pb(round.fp2);
-      html += '<div style="background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.25);border-radius:var(--r);padding:10px 12px;margin-bottom:6px">';
-      html += '<div style="font-size:18px;color:var(--go);margin-bottom:6px">' + esc(pn(p1)) + ' ' + round.w1 + ' - ' + round.w2 + ' ' + esc(pn(p2)) + '</div>';
-      round.matches.filter(function(m) { return m._done; }).forEach(function(m, i) {
-        var w = kow(m);
-        html += '<div style="font-size:13px;margin-bottom:3px"><b>P' + (i+1) + ':</b> ';
-        html += '<span style="color:' + (w === m.p1 ? 'var(--g)' : 'var(--mu)') + '">' + m.s1 + '</span>';
-        html += ' - ';
-        html += '<span style="color:' + (w === m.p2 ? 'var(--g)' : 'var(--mu)') + '">' + m.s2 + '</span>';
-        if (m.pen) html += ' (pen ' + m.ps1 + '-' + m.ps2 + ')';
-        html += '</div>';
+    if (!round) return;
+    var label = (round.isFinal||round.is3rd) ? round.round+" (Bo3)" : (round.round||"");
+    html += "<div style='margin-top:10px;font-size:12px;color:var(--mu);font-weight:700;text-transform:uppercase;padding-bottom:6px'>" + esc(label) + "</div>";
+    if (round.isFinal||round.is3rd) {
+      var p1=pb(round.fp1), p2=pb(round.fp2);
+      html += "<div style='background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.25);border-radius:var(--r);padding:10px 12px;margin-bottom:6px'>";
+      html += "<div style='font-size:18px;color:var(--go);margin-bottom:6px'>" + esc(pn(p1)) + " " + (round.w1||0) + " - " + (round.w2||0) + " " + esc(pn(p2)) + "</div>";
+      (round.matches||[]).filter(function(m){return m&&m._done;}).forEach(function(m,i) {
+        var w=kow(m);
+        var pen = m.pen ? " (pen " + m.ps1 + "-" + m.ps2 + ")" : "";
+        html += "<div style='font-size:13px;margin-bottom:3px'><b>P" + (i+1) + ":</b> ";
+        html += "<span style='color:" + (w===m.p1?"var(--g)":"var(--mu)") + "'>" + m.s1 + "</span>";
+        html += " - ";
+        html += "<span style='color:" + (w===m.p2?"var(--g)":"var(--mu)") + "'>" + m.s2 + "</span>" + pen + "</div>";
       });
-      html += '</div>';
+      html += "</div>";
     } else {
-      round.matches.forEach(function(m, mi) {
-        var p1 = pb(m.p1), p2 = pb(m.p2), d = m._done, w = d ? kow(m) : null;
-        var r1 = d ? (w === m.p1 ? "win" : "lose") : "", r2 = d ? (w === m.p2 ? "win" : "lose") : "";
-        html += '<div class="ko-match ' + (d ? "done" : "") + '">';
-        html += '<div class="ko-hdr"><span class="ko-lbl">Partido ' + (mi+1) + '</span>';
-        html += '<span style="font-size:11px;color:' + (d ? 'var(--g)' : 'var(--mu)') + '">' + (d ? 'Finalizado' : 'Pendiente') + '</span></div>';
-        html += '<div class="ko-row"><div class="ko-dor ' + r1 + '">' + esc(p1 ? p1.dorsal : "?") + '</div>';
-        html += '<div class="ko-nm">' + esc(pn(p1)) + '</div>';
-        if (d) html += '<div class="ko-sc ' + r1 + '">' + m.s1 + '</div>';
-        html += '</div>';
-        html += '<div class="ko-row"><div class="ko-dor ' + r2 + '">' + esc(p2 ? p2.dorsal : "?") + '</div>';
-        html += '<div class="ko-nm">' + esc(pn(p2)) + '</div>';
-        if (d) html += '<div class="ko-sc ' + r2 + '">' + m.s2 + '</div>';
-        html += '</div>';
-        if (m.pen) html += '<div style="font-size:11px;color:var(--go);padding:3px 12px">Penaltis: ' + m.ps1 + ' - ' + m.ps2 + '</div>';
-        html += '</div>';
+      (round.matches||[]).forEach(function(m,mi) {
+        if (!m) return;
+        var p1=pb(m.p1), p2=pb(m.p2), d=m._done, w=d?kow(m):null;
+        var r1=d?(w===m.p1?"win":"lose"):"", r2=d?(w===m.p2?"win":"lose"):"";
+        html += "<div style='display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:6px" + (d?";border-left:3px solid var(--g)":"") + "'>";
+        html += "<div style='flex:1'>";
+        html += "<div style='font-weight:700;font-size:14px;color:" + (d&&w===m.p1?"var(--g)":d?"var(--mu)":"var(--tx)") + "'>" + esc(p1?pn(p1):"TBD") + "</div>";
+        html += "<div style='font-weight:700;font-size:14px;color:" + (d&&w===m.p2?"var(--g)":d?"var(--mu)":"var(--tx)") + "'>" + esc(p2?pn(p2):"TBD") + "</div></div>";
+        if (d) {
+          html += "<div style='text-align:center'>";
+          html += "<div style='font-size:18px;color:" + (w===m.p1?"var(--g)":"var(--re)") + "'>" + m.s1 + "</div>";
+          html += "<div style='font-size:18px;color:" + (w===m.p2?"var(--g)":"var(--re)") + "'>" + m.s2 + "</div></div>";
+        } else {
+          html += "<div style='font-size:11px;color:var(--mu);font-weight:700'>PEND</div>";
+        }
+        if (m.pen) html += "<div style='font-size:10px;color:var(--go);font-weight:700'>P " + m.ps1 + "-" + m.ps2 + "</div>";
+        html += "</div>";
       });
     }
   });
   cnt.innerHTML = html;
 }
 
-function renderActividad() {
-  var cnt = document.getElementById("actividadContent");
-  if (!actLog.length) { cnt.innerHTML = "Sin actividad registrada"; return; }
-  var html = '<div class="card">';
-  actLog.forEach(function(e) {
-    var p1 = pb(e.p1), p2 = pb(e.p2);
-    var penStr = e.pen ? " (pen " + e.ps1 + "-" + e.ps2 + ")" : "";
-    var c1 = e.s1 > e.s2 ? "var(--g)" : e.s1 < e.s2 ? "var(--re)" : "var(--go)";
-    var c2 = e.s2 > e.s1 ? "var(--g)" : e.s2 < e.s1 ? "var(--re)" : "var(--go)";
-    html += '<div class="log-row">';
-    html += '<div style="display:flex;justify-content:space-between;margin-bottom:3px">';
-    html += '<span><b>' + esc(pn(p1)) + '</b> ';
-    html += '<span style="font-size:18px;color:' + c1 + '">' + e.s1 + '</span>';
-    html += ' - ';
-    html += '<span style="font-size:18px;color:' + c2 + '">' + e.s2 + '</span>';
-    html += ' <b>' + esc(pn(p2)) + '</b>' + penStr + '</span>';
-    html += '<span style="font-size:11px;color:var(--mu)">' + esc(e.ts) + '</span>';
-    html += '</div>';
-    html += '<div style="display:flex;justify-content:space-between">';
-    html += '<span style="font-size:11px;color:var(--mu)">' + esc(e.label) + '</span>';
-    if (e.staff) html += '<span style="font-size:12px;color:var(--g)">' + esc(e.staff) + '</span>';
-    html += '</div></div>';
+function sortStats(col) {
+  if (sortCol===col) { sortDir*=-1; } else { sortCol=col; sortDir=-1; }
+  renderStats();
+}
+
+function renderStats() {
+  var cnt = document.getElementById("statsContent");
+  if (!S || !S.phase || !S.players) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>Sin datos</div>"; return; }
+  var statMap = {};
+  S.players.forEach(function(p) { statMap[p.id]={id:p.id,j:0,g:0,e:0,d:0,gf:0,gc:0,pts:0}; });
+  function proc(matches) {
+    if (!matches) return;
+    matches.forEach(function(m) {
+      if (!m || m.s1===null || m.s1===undefined) return;
+      var a=statMap[m.p1], b=statMap[m.p2];
+      if (!a||!b) return;
+      a.j++;b.j++;a.gf+=m.s1;a.gc+=m.s2;b.gf+=m.s2;b.gc+=m.s1;
+      if(m.s1>m.s2){a.g++;a.pts+=3;b.d++;}
+      else if(m.s1<m.s2){b.g++;b.pts+=3;a.d++;}
+      else{a.e++;b.e++;a.pts+=1;b.pts+=1;}
+    });
+  }
+  (S.groups1||[]).forEach(function(g){if(g)proc(g.matches);});
+  (S.groups2||[]).forEach(function(g){if(g)proc(g.matches);});
+  (S.knockout||[]).forEach(function(r){if(r)proc(r.matches);});
+
+  var rows = Object.values(statMap).filter(function(r){return r.j>0;});
+  rows.sort(function(a,b){
+    var va,vb;
+    if(sortCol==="j"){va=a.j;vb=b.j;}
+    else if(sortCol==="g"){va=a.g;vb=b.g;}
+    else if(sortCol==="e"){va=a.e;vb=b.e;}
+    else if(sortCol==="d"){va=a.d;vb=b.d;}
+    else if(sortCol==="gf"){va=a.gf;vb=b.gf;}
+    else if(sortCol==="gc"){va=a.gc;vb=b.gc;}
+    else if(sortCol==="gd"){va=a.gf-a.gc;vb=b.gf-b.gc;}
+    else{va=a.pts;vb=b.pts;}
+    if(vb!==va)return sortDir*(vb-va);
+    return (b.gf-b.gc)-(a.gf-a.gc);
   });
-  html += '</div>';
+
+  function sc(col){return sortCol===col?(sortDir===-1?" v":" ^"):""; }
+
+  var totalJ = rows.reduce(function(a,r){return a+r.j;},0);
+  var totalG = rows.reduce(function(a,r){return a+r.gf;},0);
+  var avg = totalJ>0?(totalG/totalJ*2).toFixed(1):"0.0";
+
+  var html = "<div style='display:flex;gap:8px;margin-bottom:14px'>";
+  html += "<div class='stbox'><div class='stval'>" + rows.length + "</div><div class='stlbl'>Jugadores</div></div>";
+  html += "<div class='stbox'><div class='stval'>" + Math.floor(totalJ/2) + "</div><div class='stlbl'>Partidos</div></div>";
+  html += "<div class='stbox'><div class='stval'>" + avg + "</div><div class='stlbl'>Goles/P</div></div>";
+  html += "</div>";
+
+  html += "<div style='background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;margin-bottom:14px'>";
+  html += "<table class='stats-tbl'><thead><tr>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='pts' style='text-align:left;cursor:pointer;padding:6px 8px'>Dorsal" + sc("pts") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='j' style='cursor:pointer;padding:6px 4px'>J" + sc("j") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='g' style='cursor:pointer;padding:6px 4px;color:var(--g)'>G" + sc("g") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='e' style='cursor:pointer;padding:6px 4px;color:var(--go)'>E" + sc("e") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='d' style='cursor:pointer;padding:6px 4px;color:var(--re)'>D" + sc("d") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='gf' style='cursor:pointer;padding:6px 4px'>GF" + sc("gf") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='gc' style='cursor:pointer;padding:6px 4px'>GC" + sc("gc") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='gd' style='cursor:pointer;padding:6px 4px'>GD" + sc("gd") + "</th>";
+  html += "<th onclick='sortStats(this.dataset.col)' data-col='pts' style='cursor:pointer;padding:6px 4px;color:var(--g)'>Pts" + sc("pts") + "</th>";
+  html += "</tr></thead><tbody>";
+
+  rows.forEach(function(r, idx) {
+    var p=pb(r.id), gd=r.gf-r.gc;
+    html += "<tr style='background:" + (idx%2===0?"rgba(0,255,135,.02)":"") + "'>";
+    html += "<td style='padding:7px 8px;border-bottom:1px solid var(--bd);font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:14px;text-align:left'>" + esc(p?p.dorsal:"?");
+    if(p&&p.alias) html += "<br><span style='font-size:11px;color:var(--mu)'>" + esc(p.alias) + "</span>";
+    html += "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);font-family:Bebas Neue,sans-serif;font-size:18px'>" + r.j + "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);color:var(--g);font-weight:700'>" + r.g + "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);color:var(--go);font-weight:700'>" + r.e + "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);color:var(--re);font-weight:700'>" + r.d + "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);color:var(--mu)'>" + r.gf + "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);color:var(--mu)'>" + r.gc + "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);font-weight:700;color:" + (gd>0?"var(--g)":gd<0?"var(--re)":"var(--mu)") + "'>" + (gd>0?"+":"") + gd + "</td>";
+    html += "<td style='padding:7px 4px;border-bottom:1px solid var(--bd);font-family:Bebas Neue,sans-serif;font-size:20px;color:var(--g)'>" + r.pts + "</td>";
+    html += "</tr>";
+  });
+  html += "</tbody></table></div>";
+
+  html += "<div style='margin-top:4px'><div style='font-size:12px;color:var(--mu);font-weight:700;text-transform:uppercase;margin-bottom:10px'>Progreso individual</div>";
+  rows.forEach(function(r) {
+    var p=pb(r.id);
+    var wp=r.j>0?Math.round(r.g/r.j*100):0;
+    var ep=r.j>0?Math.round(r.e/r.j*100):0;
+    var lp=r.j>0?Math.round(r.d/r.j*100):0;
+    html += "<div style='margin-bottom:10px'>";
+    html += "<div style='display:flex;justify-content:space-between;margin-bottom:3px'>";
+    html += "<span style='font-family:Barlow Condensed,sans-serif;font-weight:700;font-size:13px'>" + esc(p?pn(p):"?") + " <span style='color:var(--mu);font-weight:400'>" + r.j + "J</span></span>";
+    html += "<span style='font-size:11px'><span style='color:var(--g)'>" + r.g + "G</span> <span style='color:var(--go)'>" + r.e + "E</span> <span style='color:var(--re)'>" + r.d + "D</span></span></div>";
+    html += "<div style='display:flex;height:7px;border-radius:4px;overflow:hidden;background:var(--s2)'>";
+    html += "<div style='width:" + wp + "%;background:var(--g)'></div>";
+    html += "<div style='width:" + ep + "%;background:var(--go)'></div>";
+    html += "<div style='width:" + lp + "%;background:var(--re)'></div>";
+    html += "</div></div>";
+  });
+  html += "<div style='display:flex;gap:12px;font-size:11px;color:var(--mu);margin-top:6px'><span><span style='color:var(--g)'>&#9632;</span> Victoria</span><span><span style='color:var(--go)'>&#9632;</span> Empate</span><span><span style='color:var(--re)'>&#9632;</span> Derrota</span></div></div>";
+
   cnt.innerHTML = html;
 }
 
+function renderActividad() {
+  var cnt = document.getElementById("actividadContent");
+  if (!actLog.length) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>Sin actividad</div>"; return; }
+  var html = "<div class='card'>";
+  actLog.forEach(function(e) {
+    var p1=pb(e.p1), p2=pb(e.p2);
+    var pen = e.pen ? " (pen " + e.ps1 + "-" + e.ps2 + ")" : "";
+    var c1 = e.s1>e.s2?"var(--g)":e.s1<e.s2?"var(--re)":"var(--go)";
+    var c2 = e.s2>e.s1?"var(--g)":e.s2<e.s1?"var(--re)":"var(--go)";
+    html += "<div class='log-row'>";
+    html += "<div style='display:flex;justify-content:space-between;margin-bottom:3px'>";
+    html += "<span><b>" + esc(pn(p1)) + "</b> <span style='font-size:18px;color:" + c1 + "'>" + e.s1 + "</span> - <span style='font-size:18px;color:" + c2 + "'>" + e.s2 + "</span> <b>" + esc(pn(p2)) + "</b>" + pen + "</span>";
+    html += "<span style='font-size:11px;color:var(--mu)'>" + esc(e.ts) + "</span></div>";
+    html += "<div style='display:flex;justify-content:space-between'>";
+    html += "<span style='font-size:11px;color:var(--mu)'>" + esc(e.label) + "</span>";
+    if (e.staff) html += "<span style='font-size:12px;color:var(--g)'>" + esc(e.staff) + "</span>";
+    html += "</div></div>";
+  });
+  html += "</div>";
+  cnt.innerHTML = html;
+}
+
+window.addEventListener("load", function() { initFirebase(); });
 </script>
 </body>
 </html>
