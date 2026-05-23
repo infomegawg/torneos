@@ -1291,10 +1291,38 @@ function renderConfig() {
   html += "</div>";
   html += '<button class="btn btn-s" onclick="saveNombre()" style="margin-bottom:16px">Guardar nombre</button>';
 
-  html += '<div class="ctitle" style="margin-top:8px">Zona peligrosa</div>';
+  html += '<div class="ctitle" style="margin-top:8px">Cerrar con menos jugadores</div>';
+  html += '<p style="font-size:12px;color:var(--mu);margin-bottom:10px">Si no han llegado todos los dorsales, ajusta el numero y regenera los grupos.</p>';
+  html += '<div style="display:flex;gap:8px;margin-bottom:8px">';
+  html += '<input type="number" id="cfgCloseNum" min="4" max="' + (S ? S.totalPlayers : 64) + '" placeholder="Ej: 24" style="flex:1;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:10px;color:var(--tx);font-size:16px;outline:none"/>';
+  html += '<button class="btn btn-g btn-sm" onclick="closeTournamentFromConfig()" style="flex:0 0 auto;width:auto">Cerrar</button>';
+  html += '</div>';
+
+  html += '<div class="ctitle" style="margin-top:16px">Zona peligrosa</div>';
   html += '<button class="btn btn-r" onclick="confirmReset()">Reiniciar torneo completo</button>';
 
   document.getElementById("configContent").innerHTML = html;
+}
+
+function closeTournamentFromConfig() {
+  var actual = parseInt(document.getElementById("cfgCloseNum").value);
+  if (isNaN(actual) || actual < 4) { alert("Numero de jugadores invalido"); return; }
+  if (!S) { alert("No hay torneo activo"); return; }
+  if (actual > S.totalPlayers) { alert("No puede ser mayor que " + S.totalPlayers); return; }
+  if (!confirm("Cerrar torneo con " + actual + " jugadores? Se regeneraran los grupos y se perderan los resultados actuales.")) return;
+  S.players = mkPlayers(actual);
+  S.totalPlayers = actual;
+  S.phase = null;
+  S.groups1 = [];
+  S.groups2 = [];
+  S.knockout = [];
+  S.finished = false;
+  S.groupMode = null;
+  S.manualGroups = null;
+  viewTanda = 0;
+  save();
+  goTab("partidos", document.querySelector(".tab"));
+  renderAll();
 }
 
 function saveNombre() {
