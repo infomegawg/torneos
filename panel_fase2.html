@@ -62,7 +62,7 @@ window.addEventListener("load", function() {
     appId: "1:751397475474:web:b9a322adafcbe2b993424b"
   });
   _db = firebase.firestore();
-  _db.collection("torneos").doc("torneo_fc26_torneo__fase_2").onSnapshot(function(snap) {
+  _db.collection("torneos").doc("torneo_fc26_torneo___fase_2").onSnapshot(function(snap) {
     if (!snap.exists) {
       document.getElementById("cnt").innerHTML = "Sin datos en Firebase. Abre staff_fase2.html primero.";
       return;
