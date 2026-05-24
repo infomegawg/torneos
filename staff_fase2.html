@@ -588,6 +588,11 @@ function advancePhase() {
     if (!S.groups2.every(isGroupDone)) { alert("Hay partidos pendientes en Fase 2"); return; }
     S.groups2.forEach(function(g) { g.complete = true; });
     buildKnockout();
+  } else if (S.phase === "groups1" && !S.groups2.length) {
+    // staff_fase2: only has groups1, go straight to knockout
+    if (!S.groups1.every(isGroupDone)) { alert("Hay partidos pendientes"); return; }
+    S.groups1.forEach(function(g) { g.complete = true; });
+    buildKnockout();
   } else if (S.phase === "knockout") {
     advanceKnockout();
   }
@@ -612,41 +617,32 @@ function buildGroups2(qualified) {
 }
 
 function buildKnockout() {
-  // Get top 2 from each group
+  // Get top 2 from each group + collect thirds for repesca
   var top2 = [];
   var thirds = [];
-  S.groups2.forEach(function(g) {
+  var groups = S.groups2.length ? S.groups2 : S.groups1;
+  groups.forEach(function(g) {
     var st = groupStandings(g);
-    top2.push(st[0].id);
-    top2.push(st[1].id);
+    if (st[0]) top2.push(st[0].id);
+    if (st[1]) top2.push(st[1].id);
     if (st[2]) thirds.push({ id: st[2].id, pts: st[2].pts, gd: st[2].gf - st[2].gc, gf: st[2].gf });
   });
 
   var qualified = top2.slice();
   var needed = 16;
-  var current = qualified.length;
+  var diff = needed - qualified.length;
 
-  if (current === needed) {
-    buildOctavos(qualified);
-  } else if (current < needed) {
-    // Need repesca or adjustment
-    var diff = needed - current;
-    // Sort thirds by pts, gd, gf
+  if (diff > 0 && thirds.length > 0) {
+    // Repesca: take best thirds sorted by pts, gd, gf
     thirds.sort(function(a, b) {
       if (b.pts !== a.pts) return b.pts - a.pts;
       if (b.gd !== a.gd) return b.gd - a.gd;
       return b.gf - a.gf;
     });
-    var option = S.adjustOption || "repesca";
-    if (option === "repesca") {
-      thirds.slice(0, diff).forEach(function(t) { qualified.push(t.id); });
-      buildOctavos(qualified);
-    } else if (option === "bye") {
-      buildOctavos(qualified); // top players get bye in first round
-    }
-  } else {
-    buildOctavos(qualified.slice(0, needed));
+    thirds.slice(0, diff).forEach(function(t) { qualified.push(t.id); });
   }
+
+  buildOctavos(qualified.slice(0, 16));
 }
 
 function buildOctavos(qualified) {
