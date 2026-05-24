@@ -127,8 +127,16 @@ function listenToDoc(docName) {
     }
     try {
       var raw = snap.data().state;
-      S = typeof raw === "string" ? JSON.parse(raw) : raw;
-      if (!S) throw new Error("Estado vacio");
+      if (!raw) throw new Error("Campo state vacio");
+      if (typeof raw === "string") {
+        S = JSON.parse(raw);
+      } else if (typeof raw === "object") {
+        S = raw;
+      } else {
+        throw new Error("Formato state desconocido: " + typeof raw);
+      }
+      if (!S) throw new Error("Estado null tras parseo");
+      if (!S.players) throw new Error("Estado sin players: " + JSON.stringify(Object.keys(S)));
       buildLog();
       renderAll();
       var now = new Date();
@@ -207,7 +215,8 @@ function renderAll() {
 
 function renderResumen() {
   var cnt = document.getElementById("resumenContent");
-  if (!S || !S.phase) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>El torneo no ha comenzado.</div>"; return; }
+  if (!S) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>Sin datos. Abre la app de staff primero.</div>"; return; }
+  if (!S.phase) { cnt.innerHTML = "<div style='text-align:center;padding:40px;color:var(--mu)'>Torneo no iniciado aun.</div>"; return; }
 
   if (S.finished) {
     var ch=pb(S.champion), ru=pb(S.runnerUp), th=S.third?pb(S.third):null, wn=S.winnerNames||{};
