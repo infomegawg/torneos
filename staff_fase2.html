@@ -911,7 +911,7 @@ function renderGroupPhase() {
   var allDone = groups.every(isGroupDone);
   var advBtn = document.getElementById("advBtn");
   advBtn.style.display = allDone ? "flex" : "none";
-  advBtn.textContent = isF1 ? "Avanzar a Fase 2" : "Avanzar a Eliminatorias";
+  advBtn.textContent = "Avanzar a Eliminatorias";
 
   var donePart = groups.reduce(function(a, g) { return a + g.matches.filter(function(m) { return m.s1 !== null; }).length; }, 0);
   var totalPart = groups.reduce(function(a, g) { return a + g.matches.length; }, 0);
