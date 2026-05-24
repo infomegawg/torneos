@@ -667,12 +667,7 @@ function advanceKnockout() {
     for (var i = 0; i < 2; i++) sf.push({ p1: winners[i*2], p2: winners[i*2+1], s1: null, s2: null, pen: false, ps1: null, ps2: null, _done: false });
     S.knockout.push({ round: "Semifinal", matches: sf, complete: false });
   } else if (last.round === "Semifinal") {
-    S.knockout.push({ round: "3er Puesto", is3rd: true, w1: 0, w2: 0, fp1: losers[0], fp2: losers[1],
-      matches: [
-        { p1: losers[0], p2: losers[1], s1: null, s2: null, pen: false, ps1: null, ps2: null, _done: false, leg: 1 },
-        { p1: losers[0], p2: losers[1], s1: null, s2: null, pen: false, ps1: null, ps2: null, _done: false, leg: 2 },
-        { p1: losers[0], p2: losers[1], s1: null, s2: null, pen: false, ps1: null, ps2: null, _done: false, leg: 3 }
-      ], complete: false });
+    S.knockout.push({round:"3er Puesto",matches:[{p1:losers[0],p2:losers[1],s1:null,s2:null,pen:false,ps1:null,ps2:null,_done:false}],complete:false});
     S.knockout.push({ round: "Final", isFinal: true, w1: 0, w2: 0, fp1: winners[0], fp2: winners[1],
       matches: [
         { p1: winners[0], p2: winners[1], s1: null, s2: null, pen: false, ps1: null, ps2: null, _done: false, leg: 1 },
@@ -690,14 +685,16 @@ function koWinner(m) {
 function koLoser(m) { var w = koWinner(m); return w === m.p1 ? m.p2 : m.p1; }
 
 function checkFinished() {
-  var tR = S.knockout.find(function(r) { return r.is3rd; });
+  var tR = S.knockout.find(function(r) { return r.round === "3er Puesto"; });
   var fR = S.knockout.find(function(r) { return r.isFinal; });
   if (!tR || !fR) return;
-  if ((tR.w1 >= 2 || tR.w2 >= 2) && (fR.w1 >= 2 || fR.w2 >= 2)) {
+  var thirdDone = tR.matches[0] && tR.matches[0]._done;
+  var finalDone = fR.w1 >= 2 || fR.w2 >= 2;
+  if (thirdDone && finalDone) {
     var fw = fR.w1 >= 2 ? fR.fp1 : fR.fp2;
     var fl = fw === fR.fp1 ? fR.fp2 : fR.fp1;
     S.champion = fw; S.runnerUp = fl;
-    S.third = tR.w1 >= 2 ? tR.fp1 : tR.fp2;
+    S.third = koWinner(tR.matches[0]);
     S.finished = true;
   }
 }
@@ -770,7 +767,7 @@ function saveScore() {
   m._staff = staffName;
   if (mCtx.phase === "ko") {
     var r = S.knockout[mCtx.gi];
-    if (r.isFinal || r.is3rd) {
+    if (r.isFinal) {
       r.w1 = 0; r.w2 = 0;
       r.matches.forEach(function(lm) { if (lm._done) { if (koWinner(lm) === lm.p1) r.w1++; else r.w2++; } });
     }
@@ -1048,7 +1045,7 @@ function renderKoPhase() {
   var isFinalDone = last.isFinal && (last.w1 >= 2 || last.w2 >= 2);
   var is3rdDone = last.is3rd && (last.w1 >= 2 || last.w2 >= 2);
   var allDone = last.matches.every(function(m) { return m._done; });
-  var canAdv = allDone && !isFinalDone && !is3rdDone && !last.is3rd && !last.isFinal;
+  var canAdv = allDone && !isFinalDone && last.round !== "3er Puesto" && !last.isFinal;
   document.getElementById("advBtn").style.display = canAdv ? "flex" : "none";
   document.getElementById("advBtn").textContent = "Siguiente ronda";
 
