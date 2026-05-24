@@ -576,14 +576,10 @@ function isGroupDone(grp) { return grp.matches.every(function(m) { return m.s1 !
 // ═══════════════════════════════════════════════════════════
 function advancePhase() {
   if (S.phase === "groups1") {
-    if (!S.groups1.every(isGroupDone)) { alert("Hay partidos pendientes en Fase 1"); return; }
+    if (!S.groups1.every(isGroupDone)) { alert("Hay partidos pendientes"); return; }
     S.groups1.forEach(function(g) { g.complete = true; });
-    // Get qualified: top 2 from each group
-    var qualified = [];
-    S.groups1.forEach(function(g) {
-      groupStandings(g).slice(0, 2).forEach(function(s) { qualified.push(s.id); });
-    });
-    buildGroups2(qualified);
+    // Go straight to knockout with repesca - no groups2
+    buildKnockout();
   } else if (S.phase === "groups2") {
     if (!S.groups2.every(isGroupDone)) { alert("Hay partidos pendientes en Fase 2"); return; }
     S.groups2.forEach(function(g) { g.complete = true; });
